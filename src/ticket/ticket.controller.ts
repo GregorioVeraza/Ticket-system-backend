@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Put } from '@nestjs/common';
 import { TicketService } from './ticket.service';
 import { CreateTicketDto } from './dto/create-ticket.dto';
 import { UpdateTicketDto } from './dto/update-ticket.dto';
@@ -15,19 +15,33 @@ export class TicketController {
   create(@Body() createTicketDto: CreateTicketDto) {
     return this.ticketService.create(createTicketDto); 
   }
-
+/*
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
   @Get()
   findAll() {
     return this.ticketService.findAll();
   }
-
+*/
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.ticketService.findOne(+id);
+    return this.ticketService.findOne(id);
+  }
+
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'))
+  @Get(':uuid')
+  findOneByUuid(@Param('uuid') uuid: string) {
+    return this.ticketService.findOneByUuid(uuid);
+  }
+
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'))
+  @Put(':uuid')
+  validarTicket(@Param('uuid') uuid: string) {
+    return this.ticketService.validarTicket(uuid);
   }
 
 /*

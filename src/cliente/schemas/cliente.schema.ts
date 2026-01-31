@@ -11,11 +11,17 @@ export class cliente {
   @Prop({ required: true })
   email: string;
 
-  @Prop({ required: true })
-  password:String;
+  @Prop({ required: false })
+  password?: String;
+
+  @Prop({ required: true, unique: true, sparse: true })
+  auth0Sub: string;
   
-  @Prop({ type: [{ type: Types.ObjectId, ref: 'TipoEntrada' }], required: true })
+  @Prop({ type: [{ type: Types.ObjectId, ref: 'TipoEntrada' }], required: false })
     tickets: Ticket[];
+
+  @Prop({ required: true })
+  rol: string;
 }
 
 

@@ -30,6 +30,10 @@ export class Evento {
     }
   )
   tipoEntrada: TipoEntrada[];
+  @Prop({required: true })
+    creadorId: string;
+  @Prop({ required: true })
+  imagePublicId: string;
 }
 
 export const EventoSchema = SchemaFactory.createForClass(Evento);

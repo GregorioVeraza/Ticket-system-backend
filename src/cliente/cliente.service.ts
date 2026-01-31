@@ -29,24 +29,30 @@ export class ClienteService {
   constructor(@InjectModel(cliente.name) private clienteModel: Model<ClienteDocument>){}
 
   create(createClienteDto: CreateClienteDto): Promise<ClienteDocument> {
+    
     const cliente = new this.clienteModel(createClienteDto);
     return cliente.save();
   }
   
   
-  
+  /*
   async findAll():  Promise<ResponseMultipleClienteDto[]>{
     const clientes = await this.clienteModel
     .find()
     .populate({path:'tickets', select: 'id Usado entrada evento'}).exec();
-    
+    return ;
     return clientes.map(cliente => ({
       email: String(cliente.email),
-      password: String(cliente.password),
       tickets: convertirTicket(cliente.tickets as Ticket[]),
     }));;
+  }*/
+  async findOneById(id: string): Promise<string> {
+    const cliente = await this.clienteModel.findOne({ _id: id }).exec();
+    if (!cliente) {
+      throw new Error(`Cliente con id ${id} no encontrado`);
+    }
+    return cliente.email;
   }
-
   async findOne(id: string): Promise<ResponseClienteTicketsDto> {
   const cliente = await this.clienteModel
     .findOne({ _id: id }) // importante usar findOne
@@ -70,10 +76,28 @@ export class ClienteService {
   };
 }
 
+  async findByAuth0Sub(auth0Sub: string): Promise<ClienteDocument> {
+    const cliente = await this.clienteModel.findOne({ auth0Sub }).exec();
+    if (!cliente) {
+      throw new Error(`Cliente con auth0Sub ${auth0Sub} no encontrado`);
+    }
+    return cliente;
+  }
+
 
   update(id: number, updateClienteDto: UpdateClienteDto) {
     return `This action updates a #${id} cliente`;
   }
+
+  addTicket(idCliente: string, idTicket: string){
+     this.clienteModel.findByIdAndUpdate(
+      idCliente,
+      { $push: { tickets: idTicket } },
+      { new: true },
+    ).exec();
+  }
+
+  
 
   remove(id: number) {
     return `This action removes a #${id} cliente`;

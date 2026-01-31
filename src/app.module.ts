@@ -9,10 +9,13 @@ import { TicketModule } from './ticket/ticket.module';
 import { ClienteModule } from './cliente/cliente.module';
 import { StaffModule } from './staff/staff.module';
 import { AuthzModule } from './authz/authz.module';
+import { MercadoPagoModule } from './mercado-pago/mercado-pago.module';
+import { OrdenCompraModule } from './orden-compra/orden-compra.module';
+import { TestingModule } from './testing/testing.module';
 
 //gregoveraza_db_user:gre123
 @Module({
-  imports: [MongooseModule.forRoot(`mongodb+srv://gregoveraza_db_user:gre123@cluster0.mebxqkn.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`),EventoModule, TipoEntradaModule, TicketModule, ClienteModule, StaffModule, AuthzModule],
+  imports: [MongooseModule.forRoot(`mongodb+srv://gregoveraza_db_user:gre123@cluster0.mebxqkn.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`),EventoModule, TipoEntradaModule, TicketModule, ClienteModule, StaffModule, AuthzModule, MercadoPagoModule, OrdenCompraModule, TestingModule],
   controllers: [AppController, eventoController],
   providers: [AppService],
 })

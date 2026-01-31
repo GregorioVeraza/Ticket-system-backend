@@ -4,11 +4,15 @@ import { ApiProperty } from "@nestjs/swagger";
 
 export class CreateEventoDto {
   @ApiProperty()
-  titulo: string;
+  nombre: string;
   @ApiProperty()
   fecha: Date;
   @ApiProperty()
   descripcion: string;
   @ApiProperty({type: CreateTipoEntradaDto})
   tipoEntrada: CreateTipoEntradaDto[];
+  @ApiProperty()
+  creadorId: string;
+  @ApiProperty()
+  imagePublicId: string;
 }

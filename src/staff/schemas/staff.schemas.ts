@@ -4,7 +4,12 @@ import { Ticket } from 'src/ticket/schemas/ticket.schema';
 
 export type EventoDocument = Staff & Document;
 
-
+export enum StaffRole {
+  STAFF = 'staff',
+  PRODUCER = 'productora',
+  VALIDATOR = 'validador',
+  ADMIN = 'admin',
+}
 
 @Schema()
 export class Staff {
@@ -12,8 +17,12 @@ export class Staff {
   email: string;
 
   @Prop({ required: true })
-  password:String;
+  password: String;
+
+  @Prop({ required: false, default: StaffRole.STAFF })
+  role: StaffRole;
 }
 
+export const StaffSchema = SchemaFactory.createForClass(Staff);
 
 export type UsuarioDocument = Staff & Document;

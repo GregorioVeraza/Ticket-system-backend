@@ -3,7 +3,7 @@ import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 
 export class updateTipoEntradaDto{
     @ApiProperty()
-    _id?: number;
+    _id?: string;
 
     @ApiPropertyOptional()
     nombre?: string;

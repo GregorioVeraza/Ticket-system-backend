@@ -3,7 +3,7 @@ import { CreateTipoEntradaDto } from "src/tipo-entrada/dto/create-tipo-entrada.d
 
 export class returnEventoDto{
     @ApiProperty()
-    id: number;
+    id: string;
     @ApiProperty()
     nombre: string;
     @ApiProperty()
@@ -12,4 +12,8 @@ export class returnEventoDto{
     descripcion: string;
     @ApiProperty({type: [CreateTipoEntradaDto]})
     tipoEntrada:  CreateTipoEntradaDto[]; 
+    @ApiProperty()
+    creadorId: string;
+    @ApiProperty()
+    imagePublicId: string;  
 }
